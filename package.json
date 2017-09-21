@@ -1,5 +1,5 @@
 {
-  "name": "wc-vue-templates",
+  "name": "wc-spa-templates",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -45,6 +45,8 @@
     "vue-router": "^2.3.0",
     "vue-template-compiler": "^2.2.6",
     "vuex": "^2.2.1",
+    "wc-fetch": "^1.5.8",
+    "wc-utils": "^1.2.9",
     "webpack": "^2.3.2",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-hot-middleware": "^2.17.1"
