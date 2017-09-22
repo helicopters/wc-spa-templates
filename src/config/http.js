@@ -17,5 +17,9 @@ export default {
 	'pre': {
 		domain: '',
 		path: ''
+	},
+	'scp': {
+		domain: '',
+		path: ''
 	}
 }
