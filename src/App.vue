@@ -5,11 +5,6 @@
 </template>
 <script>
   export default {
-    name: 'app',
-    mounted () {
-    	console.log(process)
-    	console.log(process.env)
-    	console.log(process.env.hello)
-    }
+    name: 'app'
   }
 </script>
