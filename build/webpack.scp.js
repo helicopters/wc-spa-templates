@@ -15,7 +15,7 @@ const config = {
     output: {
         path: path.resolve(process.cwd(), 'dist'),
         filename: 'static/[name].[hash:8].js',
-        publicPath:'/'
+        publicPath:'./'
     },
     resolve: {
         extensions: ['.js', '.json', '.vue'],
@@ -92,7 +92,7 @@ const config = {
             template: './index.html',
             inject: true
         }),
-        new ExtractTextPlugin('static/style.[contentHash:8].css'),
+        new ExtractTextPlugin('style.[contentHash:8].css'),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: function(module, count) {
