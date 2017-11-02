@@ -1,2 +1,2 @@
-## wc-vue-templates
+## wc-spa-templates
 
