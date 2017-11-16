@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "fetch": "node build/fetch.js",
     "dev": "node build/server.js",
     "build": "node build/build.js",
     "test": "node build/build-test.js",
@@ -24,6 +25,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "connect-history-api-fallback": "^1.3.0",
     "css-loader": "^0.27.3",
+    "download-git-repo": "^1.0.1",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.15.2",
     "extract-text-webpack-plugin": "^2.1.0",
