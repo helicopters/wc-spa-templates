@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// const env = require('../config/pre')
+// const env = require('../config/build')
 
 const config = {
     node: {
@@ -15,6 +15,7 @@ const config = {
     output: {
         path: path.resolve(process.cwd(), 'dist'),
         filename: 'static/[name].[hash:8].js',
+        chunkFilename: '[name].chunk.js',
         publicPath:'./'
     },
     resolve: {
@@ -92,8 +93,7 @@ const config = {
             template: './index.html',
             inject: true
         }),
-        // new ExtractTextPlugin('static/style.css'),
-        new ExtractTextPlugin('style.[contentHash:8].css'),        
+        new ExtractTextPlugin('style.[contentHash:8].css'),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: function(module, count) {
@@ -106,6 +106,14 @@ const config = {
                 )
             }
         }),
+
+        new webpack.optimize.CommonsChunkPlugin({
+          async: 'used-twice',
+          minChunks: (module, count) => (
+            count >= 2
+          ),
+        }),
+
         // extract webpack runtime and module manifest to its own file in order to
         // prevent vendor hash from being updated whenever app bundle is updated
         new webpack.optimize.CommonsChunkPlugin({
