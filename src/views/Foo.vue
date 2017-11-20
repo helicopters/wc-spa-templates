@@ -1,5 +1,12 @@
 <style lang="less" scoped>
-	
+
+@import '../less/mixins.less';
+
+.container {
+	.bg(red);
+	.h(200px);
+	.pp(20px, 20px);
+}
 </style>
 <template>
 	<div class="container">

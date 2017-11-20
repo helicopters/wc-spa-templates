@@ -1,13 +1,14 @@
 <style lang="less" scoped>
 @import '../less/mixins.less';
+
 </style>
 <template>
 	<div class="container">
-		<h1>Hello World, Hello</h1>
+		
 	</div>
 </template>
 <script>
 	export default {
-		
+
 	}
 </script>
