@@ -57,7 +57,5 @@ app.listen(port, function(){
 // 打包成功之后会触发这个玩意
 devMiddleware.waitUntilValid(function(err){
 	// 打开浏览器
-	
-	opn('http://localhost:' + port + '/#/color');
 	opn('http://localhost:' + port);
 });
