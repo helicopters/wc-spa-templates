@@ -1,11 +1,16 @@
 import Vue from 'vue'
 // import store from './vuex/store'
-import router from './router'
+import router from 'router'
 
 import App from './App'
 
+/* 引入 reset.css, 以及 base.css, mixins.less */
+import '../static/reset.css';
+import '../static/base.css';
+import '../static/mixins.less';
+
 /* 引入工具函数 */
-import './modules/utils'
+import 'modules/utils'
 
 /* 引入 vconsole */
 if (process.env.NODE_ENV === 'development') {
@@ -14,9 +19,6 @@ if (process.env.NODE_ENV === 'development') {
 
 /* 引入 qrcode, 仅在开发环境生效 */
 import './modules/qrcode'
-
-// console.log(ip + '');
-// console.log(process)
 
 new Vue({
     el: '#app',

@@ -1,5 +1,7 @@
 if (process.env.NODE_ENV == 'development') {
 
+
+
 	let qrcode = null;
 	/* 第一次, 打开带 ip 的 url, 先保存 ip 地址, 然后替换url 到没有带ip参数的 url */
 	let ip = utils.parseUrl().ip;

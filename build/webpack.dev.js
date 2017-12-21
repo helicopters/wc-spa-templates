@@ -24,6 +24,10 @@ const config = {
         extensions: ['.js', '.json', '.vue'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
+            'modules': path.resolve(process.cwd(), 'src/modules'),
+            'components': path.resolve(process.cwd(), 'src/components'),
+            'config': path.resolve(process.cwd(), 'src/config'),
+            'router': path.resolve(process.cwd(), 'src/router'),
         }
     },
     module: {
