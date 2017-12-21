@@ -1,3 +1,20 @@
+// 获取 ip
+function getIPAdress(){  
+    var interfaces = require('os').networkInterfaces();  
+    for(var devName in interfaces){  
+          var iface = interfaces[devName];  
+          for(var i=0;i<iface.length;i++){  
+               var alias = iface[i];  
+               if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){  
+                     return alias.address;  
+               }  
+          }  
+    }  
+} 
+
+
+
+
 const express = require('express');
 const webpack = require('webpack');
 
@@ -48,6 +65,7 @@ app.use('/static', express.static('./static'));
 
 
 
+
 // 监听路径
 app.listen(port, function(){
 	console.log(chalk.green.bold('> Listening on port: http://localhost:' + port +'/'));
@@ -57,5 +75,5 @@ app.listen(port, function(){
 // 打包成功之后会触发这个玩意
 devMiddleware.waitUntilValid(function(err){
 	// 打开浏览器
-	opn('http://localhost:' + port);
+	opn('http://localhost:' + port + '?ip=' + getIPAdress());
 });

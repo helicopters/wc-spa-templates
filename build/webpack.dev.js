@@ -8,8 +8,6 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 // 获取全局变量
 // const env = require('../config/dev')
 
-
-
 const config = {
     entry: {
         // webpack-hot-middleware/client 是必须要加上的, 不然的话不会热更新
@@ -81,7 +79,7 @@ const config = {
         // new webpack.NoEmitOnErrorsPlugin(),
         // new ExtractTextPlugin('style.css'),
         new HtmlWebpackPlugin({
-            template: './index.html'
+            template: './index.dev.html'
         }),
         // // 定义全局变量
         new webpack.DefinePlugin({

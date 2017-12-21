@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "fetch": "node build/fetch.js",
     "dev": "node build/server.js",
     "build": "node build/build.js",
     "test": "node build/build-test.js",
