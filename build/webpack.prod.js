@@ -26,6 +26,7 @@ const config = {
             'components': path.resolve(process.cwd(), 'src/components'),
             'config': path.resolve(process.cwd(), 'src/config'),
             'router': path.resolve(process.cwd(), 'src/router'),
+            'assets': path.resolve(process.cwd(), 'src/assets'),            
         }
     },
     module: {
