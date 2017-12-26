@@ -61,7 +61,7 @@ if (process.env.NODE_ENV == 'development') {
 				if (base64) {
 					let css = `background:url(${base64}) center center no-repeat;padding:100px 110px;line-height:220px;margin:20px;`
 					/* 清空之前输出的二维码 */
-					console.clear();
+					// console.clear();
 					console.log('%c', css);	
 					console.log(`%c当前的URL为: ${url}`, 'font-size:20px;color:red')		
 				} else {
