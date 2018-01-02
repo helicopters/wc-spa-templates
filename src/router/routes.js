@@ -5,8 +5,5 @@ export default [
 		path: '/hello',
 		name: 'Hello',
 		component: Hello
-	},
-
-
-
+	}
 ]

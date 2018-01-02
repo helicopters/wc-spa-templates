@@ -27,6 +27,7 @@ const config = {
             'config': path.resolve(process.cwd(), 'src/config'),
             'router': path.resolve(process.cwd(), 'src/router'),
             'assets': path.resolve(process.cwd(), 'src/assets'),
+            'static': path.resolve(process.cwd(), 'static')  
         }
     },
     module: {
@@ -34,7 +35,7 @@ const config = {
                 // 仅仅处理 css 文件, css-loader 是处理, postcss-loader 是加前缀
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
-                    // fallback: "style-loader",
+                    fallback: "style-loader",
                     use: 'css-loader?minimize!postcss-loader'
                 })
             }, {
@@ -42,7 +43,7 @@ const config = {
                 // 它只会处理单独的 less 文件
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
-                    // fallback: "style-loader",
+                    fallback: "style-loader",
                     use: 'css-loader?minimize!postcss-loader!less-loader'
                 })
             }, {
@@ -59,11 +60,11 @@ const config = {
                     loaders: {
                         css: ExtractTextPlugin.extract({
                             use: 'css-loader?minimize',
-                            // fallback: 'vue-style-loader'
+                            fallback: 'vue-style-loader'
                         }),
                         less: ExtractTextPlugin.extract({
                             use: 'css-loader?minimize!postcss-loader!less-loader',
-                            // fallback: 'vue-style-loader'
+                            fallback: 'vue-style-loader'
                         })
                     }
                 }
@@ -85,6 +86,9 @@ const config = {
         ]
     },
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
+        }),    
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 // 干掉打包的时候出现的 warnings

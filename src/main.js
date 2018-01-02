@@ -4,10 +4,13 @@ import router from 'router'
 
 import App from './App'
 
+/* 引入 mock, 如果需要的话 */
+import 'modules/mock'
+
 /* 引入 reset.css, 以及 base.css, mixins.less */
-import '../static/reset.css';
-import '../static/base.css';
-import '../static/mixins.less';
+import 'static/reset.css';
+import 'static/base.css';
+import 'static/mixins.less';
 
 /* 引入工具函数 */
 import 'modules/utils'
@@ -20,7 +23,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 /* 引入 qrcode, 仅在开发环境生效 */
-import './modules/qrcode'
+import 'modules/qrcode'
 
 new Vue({
     el: '#app',

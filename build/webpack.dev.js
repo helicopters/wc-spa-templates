@@ -84,7 +84,7 @@ const config = {
         // new webpack.NoEmitOnErrorsPlugin(),
         // new ExtractTextPlugin('style.css'),
         new HtmlWebpackPlugin({
-            template: './index.dev.html'
+            template: './index.html'
         }),
         // // 定义全局变量
         new webpack.DefinePlugin({
