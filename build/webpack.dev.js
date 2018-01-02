@@ -29,6 +29,7 @@ const config = {
             'config': path.resolve(process.cwd(), 'src/config'),
             'router': path.resolve(process.cwd(), 'src/router'),
             'assets': path.resolve(process.cwd(), 'src/assets'),
+            'static': path.resolve(process.cwd(), 'static')  
         }
     },
     module: {
