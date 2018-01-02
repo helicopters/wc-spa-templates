@@ -8,7 +8,8 @@
     "build": "node build/build.js",
     "test": "node build/build-test.js",
     "pre": "node build/build-pre.js",
-    "scp": "node build/build-scp.js"
+    "scp": "node build/build-scp.js",
+    "create": "node build/create.js"
   },
   "author": "linfeng123",
   "license": "MIT",
