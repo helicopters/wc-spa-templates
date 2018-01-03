@@ -25,6 +25,36 @@ if (process.env.NODE_ENV === 'development') {
 /* 引入 qrcode, 仅在开发环境生效 */
 import 'modules/qrcode'
 
+
+import Icon from 'components/wc-svg-icon'
+Vue.use(Icon);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 new Vue({
     el: '#app',
     router,
