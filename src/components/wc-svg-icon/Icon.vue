@@ -29,14 +29,14 @@
 </style>
 <template>
 	<svg version="1.1" :width="width ? width : _width" :height="height ? height: _height" :viewBox="box" :class="animationMap">
-		<path :d="path.d" :fill="fill ? fill: path.fill" :stroke="path.stroke" v-for="path in icon.paths"/>
+		<path :d="path.d" :fill="(fill||color) ? (fill||color): path.fill" :stroke="path.stroke" v-for="path in icon.paths"/>
 	</svg>	
 </template>
 <script>
 	import convert from './utils/parse'
 
 	export default {
-		props: ['name', 'fill', 'height', 'width', 'animation'],
+		props: ['name', 'fill', 'color', 'height', 'width', 'animation'],
 	    computed: {
 			normalizedScale() {
 				let scale = this.scale;
