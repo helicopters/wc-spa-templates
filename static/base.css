@@ -14,28 +14,6 @@
 	-webkit-box-orient: vertical;
 }
 
-/* 对于常见被依赖的属性, 进行的设置 */
-.relative {
-	position: relative;
-}
-
-.fl {
-	float: left;
-}
-
-.fr {
-	float: right;
-}
-/* 一般见于图片, 图片有时候就是显示成 block, a 标签也是*/
-.block {
-	display: block;
-}
-
-/* 一般设置图片背景图的时候会用 */
-.cover {
-	background-position: center center;
-	background-size: cover;	
-}
 
 /* 有时候设置两端对齐的时候会用到 */
 .flex {

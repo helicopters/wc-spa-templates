@@ -17,11 +17,6 @@ import 'modules/utils'
 /* 引入工具包 */
 import 'modules/tools'
 
-/* 引入 vconsole */
-if (process.env.NODE_ENV === 'development') {
-    var VConsole = require('vconsole/dist/vconsole.min.js');
-}
-
 /* 引入 qrcode, 仅在开发环境生效 */
 import 'modules/qrcode'
 
