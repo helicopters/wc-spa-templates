@@ -5,6 +5,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // 在命令行里面的错误提示友好一点
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
+
+
+
 // 获取全局变量
 // const env = require('../config/dev')
 
@@ -95,4 +98,10 @@ const config = {
     ]
 };
 
-module.exports = config;
+
+const vuxLoader = require('vux-loader')
+const webpackConfig = config // 原来的 module.exports 代码赋值给变量 webpackConfig
+
+module.exports = vuxLoader.merge(webpackConfig, {
+  plugins: ['vux-ui']
+})

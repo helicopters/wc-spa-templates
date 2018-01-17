@@ -135,4 +135,9 @@ const config = {
     ]
 };
 
-module.exports = config;
+const vuxLoader = require('vux-loader')
+const webpackConfig = config // 原来的 module.exports 代码赋值给变量 webpackConfig
+
+module.exports = vuxLoader.merge(webpackConfig, {
+  plugins: ['vux-ui']
+})
