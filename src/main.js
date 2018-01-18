@@ -1,3 +1,7 @@
+/* 引入工具函数, 放到顶层引入, 防止在之前的模块中没有定义 */
+import 'modules/utils'
+
+
 import Vue from 'vue'
 import store from './vuex/store'
 import router from 'router'
@@ -11,8 +15,6 @@ import 'static/base.css';
 import 'static/cover.less'
 
 
-/* 引入工具函数 */
-import 'modules/utils'
 
 /* 引入 qrcode, 仅在开发环境生效 */
 import 'modules/qrcode'
