@@ -1,8 +1,11 @@
 export default {
 	'development': {
-		
+		// url: 'http://192.168.0.102:8080/GarmentProcess/process'
+		url: 'http://explorelife.vip/process'
 	},
-	//  线上环境
+	'scp' : {
+		url: 'http://explorelife.vip/process'
+	},
 	'production': {
 	}
 }
