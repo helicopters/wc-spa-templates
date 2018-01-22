@@ -13,6 +13,8 @@ import 'static/reset.css';
 import 'static/base.css';
 /* 专门用来重置样式的 */
 import 'static/cover.less'
+/* 项目配色文件 */
+import './less/color.less'
 
 /* 引入 qrcode, 仅在开发环境生效 */
 import 'modules/qrcode'
@@ -88,6 +90,11 @@ Vue.use(wcInput);
 import Icon from 'components/wc-svg-icon'
 Vue.use(Icon);
 
+
+/* 引入 wc-swiper*/
+import wcSwiper from 'wc-swiper'
+import 'wc-swiper/style.css'
+Vue.use(wcSwiper);
 
 
 

@@ -28,7 +28,7 @@
 
 </style>
 <template>
-	<svg version="1.1" :width="width ? width : _width" :height="height ? height: _height" :viewBox="box" :class="animationMap">
+	<svg version="1.1" :width="width ? width : _width" :height="height ? height: _height" :viewBox="box" :class="animationMap" @click="fn">
 		<path :d="path.d" :fill="(fill||color) ? (fill||color): path.fill" :stroke="path.stroke" v-for="path in icon.paths"/>
 	</svg>	
 </template>
@@ -73,6 +73,11 @@
 				}
 				return map[this.animation]
 			}
+	    },
+	    methods: {
+	    	fn () {
+	    		this.$emit('click');
+	    	}
 	    }
 	}
 </script>
