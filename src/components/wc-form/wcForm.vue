@@ -121,17 +121,12 @@
 						{{countDownText}} <span class="countdown" v-show="countDown">({{countDown}})</span>
 					</x-button>
 				</x-input>
-				<!-- 
-					poppicker 
-					用户传递的 data 只要是 key:value 形式即可, 省去我的记忆负担
-					用户可以随意传递 list, 但是要指明 key, value 都是什么字段.
-					然后我通过这个可以自己转换
-				-->
 				<popup-picker
 					v-if="data.type=='popuppicker' && data.show!==false"
 					confirm-text="确定"
 					cancel-text="取消"
 					show-name
+					:columns="columns"
 					:data="data.data"
 					:title="data.name"
 					@on-change="change"
@@ -213,13 +208,7 @@
 				</wc-upload>
 			</group>
 		</group>
-		<x-button
-			class="wc-form-save-btn"
-			@click.native="save"
-			:disabled="disabled"
-			type="primary">
-			保存
-		</x-button>
+		<slot/>
 		<div class="wc-form-mask" v-if="disabled">
 		</div>
 	</div>
@@ -227,10 +216,12 @@
 <script>
 
 	import cloneDeep from 'lodash/cloneDeep'
-	import {XTextarea, Datetime, PopupPicker, XAddress, XSwitch, XNumber, Radio, PopupRadio, Checklist} from 'vux'
+	import {Group, XInput, XTextarea, Datetime, PopupPicker, XAddress, XSwitch, XNumber, Radio, PopupRadio, Checklist, XButton} from 'vux'
 
 	export default {
 		components: {
+			Group,
+			XInput,
 			PopupPicker,
 			XTextarea,
 			Datetime,
@@ -239,7 +230,8 @@
 			XNumber,
 			Radio,
 			PopupRadio,
-			Checklist
+			Checklist,
+			XButton
 		},
 		/* 获取 form 的值*/
 		props: {
@@ -303,7 +295,10 @@
 				}
 				/* 如果通过验证, 就发送表单出去 */
 				if (flag) {
-					this.$emit('save', form);
+					// this.$emit('save', form);
+					return form;
+				} else {
+					return false;
 				}
 			},
 			/* 发送验证码 */
@@ -318,7 +313,8 @@
 						clearInterval(timer);
 					}
 				}, 1000);
-				this.$emit('sendVCode');
+				/* 因为用 sendVCode 太麻烦, 所以直接用 send */
+				this.$emit('send');
 			},
 			/* change */
 			change () {
