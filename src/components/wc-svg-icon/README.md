@@ -25,9 +25,6 @@ Vue.use(Icon);
 ```javascript
 <icon name="xxxx"/>
 
-这里的 'xxxx' 是你给定的 SVG 图标的名称. 比如说你现在有 10 个 SVG 图标, 你需要做的事情是:
-1. 在 node_modules 里面找到 wc-svg-icon 目录
-2. 把这 10个图标, 拷贝到 wc-svg-icon 目录中.
 ```
 
 
@@ -40,6 +37,8 @@ name:	图标的名称, 需要和 SVG 名相同, 不需要带路径.比如:
 
 fill:	SVG 图标的 fill 颜色, 默认会使用 SVG 原本的颜色, 如果你传递了 fill 属性, 则会使用你所传递的.比如:
 <icon name="hello" fill="red"/> // 此时图标会呈现 red 色. 
+
+color: 同 fill
 
 height:	控制 SVG 图标的高度
 width:	控制 SVG 图标的宽度
