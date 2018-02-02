@@ -24,14 +24,7 @@
 		}
 	}
 }
-.wc-form-save-btn {
-	position: fixed!important;
-	bottom: 0;
-	border-radius: 0!important;
-	:after {
-		border: none!important;
-	}
-}
+
 .wc-form-mask {
 	position: absolute;
 	background: white;
@@ -40,6 +33,16 @@
 	right: 0;
 	bottom: 0;
 	opacity: 0;
+}
+
+.wc-form-mock {
+	height: .5rem;
+	background: red;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	color:white;
 }
 </style>
 <template>
@@ -61,6 +64,7 @@
 					:required="data.required"
 					v-model="data.value"
 					@on-change="change"
+					:readonly="data.readonly"
 					:title="data.name">
 				</x-input>
 				<!-- 
@@ -73,6 +77,7 @@
 					:required="data.required"
 					v-model="data.value"
 					@on-change="change"
+					:readonly="data.readonly"
 					:title="data.name">
 				</x-input>
 				<!-- number -->
@@ -84,6 +89,7 @@
 					:required="data.required"
 					v-model="data.value"
 					@on-change="change"
+					:readonly="data.readonly"
 					:title="data.name">
 				</x-input>
 				<!-- email -->
@@ -95,6 +101,7 @@
 					:required="data.required"
 					v-model="data.value"
 					@on-change="change"
+					:readonly="data.readonly"
 					:title="data.name">
 				</x-input>
 				<!-- password -->
@@ -106,6 +113,7 @@
 					:required="data.required"
 					v-model="data.value"
 					@on-change="change"
+					:readonly="data.readonly"
 					:title="data.name">
 				</x-input>
 				<x-input
@@ -126,7 +134,7 @@
 					confirm-text="确定"
 					cancel-text="取消"
 					show-name
-					:columns="columns"
+					:columns="data.columns"
 					:data="data.data"
 					:title="data.name"
 					@on-change="change"
@@ -143,12 +151,15 @@
 					@on-change="change" 
 					:title="data.name">
 				</datetime>
-				<!-- 文本输入框 -->
+
+				<!-- textarea -->
 				<x-textarea
 					v-if="data.type=='textarea' && data.show!==false"
 					v-model="data.value"
 					:max="data.max" 
 					:title="data.name"
+					:rows="data.rows"
+					:autosize="data.autoSize"
 					@on-change="change" 
 					:placeholder="data.placeholder">
 				</x-textarea>
@@ -208,7 +219,10 @@
 				</wc-upload>
 			</group>
 		</group>
+		<!-- 允许用户自己定义按钮 -->
 		<slot/>
+		<!-- 生成mock 数据的按钮 -->
+		<div class="wc-form-mock" @click="toMock" v-show="mock">生成mock 数据</div>
 		<div class="wc-form-mask" v-if="disabled">
 		</div>
 	</div>
@@ -216,12 +230,24 @@
 <script>
 
 	import cloneDeep from 'lodash/cloneDeep'
-	import {Group, XInput, XTextarea, Datetime, PopupPicker, XAddress, XSwitch, XNumber, Radio, PopupRadio, Checklist, XButton} from 'vux'
+	// import {Group, XInput, XTextarea, Datetime, PopupPicker, XAddress, XSwitch, XNumber, Radio, PopupRadio, Checklist, XButton} from 'vux'
+	// import Group from 'modules/vux/components/group'
+	// import XInput from 'modules/vux/components/x-input'
+	import XTextarea from 'modules/vux/components/x-textarea'
+	import Datetime from 'modules/vux/components/datetime'
+	import PopupPicker from 'modules/vux/components/popup-picker'
+	import XAddress from 'modules/vux/components/x-address'
+	import XSwitch from 'modules/vux/components/x-switch'
+	import XNumber from 'modules/vux/components/x-number'
+	import PopupRadio from 'modules/vux/components/popup-radio'
+	import Checklist from 'modules/vux/components/checklist'
+	import XButton from 'modules/vux/components/x-button'
+	import Radio from 'modules/vux/components/radio'
 
 	export default {
 		components: {
-			Group,
-			XInput,
+			// Group,
+			// XInput,
 			PopupPicker,
 			XTextarea,
 			Datetime,
@@ -242,6 +268,9 @@
 			},
 			/* 当前表单是否可以被编辑, 我是直接在表单上面加了一个 mask*/
 			disabled: {
+				default: false
+			},
+			mock: {
 				default: false
 			}
 		},
@@ -289,9 +318,10 @@
 						form[key] = this.value[key].value;	
 					}
 					/* 因为 upload  有初始值, 所以在提交的时候还需要把初始值给 value */
-					if (this.value[key].type == 'upload') {
-						form[key] = this.value[key].data.concat(form[key])
-					}
+					/* 不用,如果用户自己忘记了初始化, 这个不管你的事情 */
+					// if (this.value[key].type == 'upload') {
+					// 	form[key] = this.value[key].data.concat(form[key])
+					// }
 				}
 				/* 如果通过验证, 就发送表单出去 */
 				if (flag) {
@@ -320,6 +350,45 @@
 			change () {
 				this.$emit('input', this.value);
 			},
+			/* 生成 mock 数据*/
+			toMock () {
+				for (let key in this.value) {
+					let v = this.value[key];
+
+					if (v.type == 'text') {
+						v.value = `mock老谢好帅${utils.timeFormat().hour}:${utils.timeFormat().minute}`
+					}
+					if (v.type == 'tel') {
+						v.value = '188 8888 8888'
+					}
+					if (v.type == 'radio') {
+						v.value = v.data[0].key;
+					}
+
+					if (v.type == 'checklist') {
+						v.value = [v.data[0].key];
+					}
+
+					if (v.type == 'address') {
+						v.value = ["140000","140100","140105"]
+					}
+
+					if (v.type == 'popuppicker') {
+						if (v.columns == 2) {
+							// v.value.push()
+						}
+					}
+
+					if (v.type == 'date') {
+						v.value = v.startDate;
+					}
+
+					if (v.type == 'upload') {
+						v.data = ['http://n.sinaimg.cn/news/transform/w1000h500/20180119/gOqx-fyqtwzu6122241.jpg'];
+					}
+
+				}
+			}
 		}
 	}
 </script>

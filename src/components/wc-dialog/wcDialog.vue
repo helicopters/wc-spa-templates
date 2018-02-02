@@ -19,7 +19,7 @@
     top: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, .8);
+    background: rgba(0, 0, 0, .6);
     z-index: 998;
     font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
     -webkit-user-select: none;
@@ -35,7 +35,7 @@
     overflow: hidden;
     color: #000;
     border-radius: 13px;
-    width: 270px;
+    width: 300px;
     display: block;
     transform: translate3d(-50%, -50%, 0) scale(1);
     opacity: 1;
@@ -44,7 +44,7 @@
 </style>
 <template>
     <transition name="wc">
-        <div class="wc">
+        <div class="wc" v-if="isShow">
             <div class="wc-popup">
                 <slot/>
             </div>
@@ -53,5 +53,18 @@
 </template>
 <script>
     export default {
+        data () {
+            return {
+                isShow: false
+            }
+        },
+        methods: {
+            show () {
+                this.isShow = true;
+            },
+            hide () {
+                this.isShow = false;
+            }
+        }
     }
 </script>
