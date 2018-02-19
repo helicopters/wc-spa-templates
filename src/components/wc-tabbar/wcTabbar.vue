@@ -52,17 +52,25 @@
 			return {
 				list: [{
 					name: 'home',
-					text: '首页',
+					text: '会员商城',
 					path: '/home'
 				}, {
 					name: 'category',
 					text: '分类',
 					path: '/category'
-				}, {
+				},  {
+					name: 'jifen',
+					text: '积分商城',
+					path: '/integralmall'
+				},{
 					name: 'car',
 					text: '购物车',
 					path: '/car'
-				}, {
+				},{
+					name: 'fenxiao',
+					text: '分销',
+					path: '/fenxiao'
+				},{
 					name: 'usercenter',
 					text: '个人中心',
 					path: '/usercenter'

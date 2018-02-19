@@ -1,6 +1,6 @@
 <style lang="less">
 .wc-form-container {
-	margin-bottom: 70px;
+	// margin-bottom: 70px;
 	position: relative;
 }
 .wc-form-reset-group {
@@ -48,7 +48,7 @@
 <template>
 	<div class="wc-form-container">
 		<group class="wc-form-reset-group">
-			<group v-for="data in value">
+			<group v-for="(data,key) in value" :key="key">
 				<!-- 
 					手机号码
 					* 默认会添加 is-type="china-mobile"
@@ -58,7 +58,7 @@
 					v-if="data.type=='tel' && data.show!==false"
 					type="tel"
 					is-type="china-mobile"
-					mask="999 9999 9999"
+
 					:placeholder="data.placeholder"
 					:disabled="data.disabled"
 					:required="data.required"
@@ -119,9 +119,10 @@
 				<x-input
 					v-if="data.type=='vcode' && data.show!==false"
 					@on-change="change"
+					v-model="data.value"
 					title="发送验证码">
 					<x-button
-						:disabled="countDownDisabled"
+						:disabled="countDownDisabled||data.disabled"
 						@click.native="sendVCode" 
 						slot="right" 
 						type="primary" 
@@ -189,7 +190,7 @@
 					:title="data.name" 
 					v-model="data.value" 
 					:list="data.data"
-					@on-change="change" 
+					@on-show="change" 
 					:placeholder="data.placeholder">
 				</x-address>	
 				<!-- 单选 -->
@@ -230,24 +231,12 @@
 <script>
 
 	import cloneDeep from 'lodash/cloneDeep'
-	// import {Group, XInput, XTextarea, Datetime, PopupPicker, XAddress, XSwitch, XNumber, Radio, PopupRadio, Checklist, XButton} from 'vux'
-	// import Group from 'modules/vux/components/group'
-	// import XInput from 'modules/vux/components/x-input'
-	import XTextarea from 'modules/vux/components/x-textarea'
-	import Datetime from 'modules/vux/components/datetime'
-	import PopupPicker from 'modules/vux/components/popup-picker'
-	import XAddress from 'modules/vux/components/x-address'
-	import XSwitch from 'modules/vux/components/x-switch'
-	import XNumber from 'modules/vux/components/x-number'
-	import PopupRadio from 'modules/vux/components/popup-radio'
-	import Checklist from 'modules/vux/components/checklist'
-	import XButton from 'modules/vux/components/x-button'
-	import Radio from 'modules/vux/components/radio'
+	import {Group, XInput, XTextarea, Datetime, PopupPicker, XAddress, XSwitch, XNumber, Radio, PopupRadio, Checklist, XButton} from 'vux'
 
 	export default {
 		components: {
-			// Group,
-			// XInput,
+			Group,
+			XInput,
 			PopupPicker,
 			XTextarea,
 			Datetime,
@@ -322,6 +311,8 @@
 					// if (this.value[key].type == 'upload') {
 					// 	form[key] = this.value[key].data.concat(form[key])
 					// }
+
+					// console.log(JSON.stringify(this.value))
 				}
 				/* 如果通过验证, 就发送表单出去 */
 				if (flag) {
@@ -358,8 +349,11 @@
 					if (v.type == 'text') {
 						v.value = `mock老谢好帅${utils.timeFormat().hour}:${utils.timeFormat().minute}`
 					}
+					if (v.type == 'textarea') {
+						v.value = '云破月来花弄影'
+					}
 					if (v.type == 'tel') {
-						v.value = '188 8888 8888'
+						v.value = '18888888888'
 					}
 					if (v.type == 'radio') {
 						v.value = v.data[0].key;

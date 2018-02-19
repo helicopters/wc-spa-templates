@@ -35,7 +35,7 @@ let saveCurPageURL = path => {
 /* 跳转微信授权 */
 let goToWXAuth = () => {
     let url =  'https://open.weixin.qq.com/connect/oauth2/authorize'
-    let redirect_uri = 'http://explorelife.vip/gp/?#author'
+    let redirect_uri = 'http://whyhsd.com/fe/?#author'
     let query = {
         'appid': WX[process.env.NODE_ENV].APP_ID,
         'redirect_uri': encodeURIComponent(redirect_uri),
@@ -47,12 +47,6 @@ let goToWXAuth = () => {
     window.location.replace(_url);
 }
 
-if (ls.get('clear')) {
-
-} else {
-    ls.clear();
-    ls.set('clear', true);
-}
 
 router.beforeEach((to, from, next) => {
     if (to.meta.auth) {

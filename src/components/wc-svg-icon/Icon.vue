@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="less" scoped>
 /* 为防止样式冲突, 给样式改了 class名*/
 .wc-spinner {
   -webkit-animation: wc-spinner 2s infinite linear;
@@ -76,7 +76,7 @@
 	    },
 	    methods: {
 	    	fn () {
-	    		this.$emit('click');
+	    		this.$emit('click')
 	    	}
 	    }
 	}
