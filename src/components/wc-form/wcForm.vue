@@ -306,6 +306,12 @@
 					} else {
 						form[key] = this.value[key].value;	
 					}
+					/*
+						最近更新
+						关于 form upload 的描述
+						比如进来之后已经有默认值的时候, 哎不想写. 
+					*/
+
 					/* 因为 upload  有初始值, 所以在提交的时候还需要把初始值给 value */
 					/* 不用,如果用户自己忘记了初始化, 这个不管你的事情 */
 					// if (this.value[key].type == 'upload') {

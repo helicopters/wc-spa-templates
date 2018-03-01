@@ -19,27 +19,28 @@
     top: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, .75);
     z-index: 998;
     font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
     -webkit-user-select: none;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+
 }
+
+/* 内部的弹窗内容 */
 .wc-popup {
     position: fixed;
-    z-index: 999;
+
     top: 50%;
     left: 50%;
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(1.185);
-    text-align: center;
+
     overflow: hidden;
-    color: #000;
-    border-radius: 13px;
-    width: 300px;
+
+
     display: block;
     transform: translate3d(-50%, -50%, 0) scale(1);
-    opacity: 1;
-    background: white;
+
 }
 </style>
 <template>
