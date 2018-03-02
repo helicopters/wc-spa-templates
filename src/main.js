@@ -14,11 +14,11 @@ import 'static/base.css';
 import 'static/cover.less'
 /* 项目配色文件 */
 import './less/color.less'
+import './less/theme.less'
 
 /* 设置页面标题 */
 import 'modules/set-title'
 
-/* 微信相关代码 */
 
 /* 微信上传图片 */
 import wxUpload from 'modules/wx-upload'

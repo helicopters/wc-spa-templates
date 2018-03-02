@@ -1,3 +1,8 @@
+/*
+## 经历过的错误
+1. this.$wxPay(res) 正确, 但是你调用的时候是这样
+    this.$wxPay(res.data) 导致参数错误, 又 Promise 把错误给吞了, 所以要记得同时 catch 一下. 
+*/
 import Vue from 'vue'
 import wxConfig from 'config/wx'
 
@@ -7,11 +12,14 @@ let wxPay = options => {
             return new Promise((resolve) => {
                 resolve(res);
             })
-        })
+        }).catch(err => {
+            console.log('微信支付里面报错', err);
+        });
 }
 
 function WeXPay(options) {
     return new Promise((resolve, reject) => {
+
         function onBridgeReady() {
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {

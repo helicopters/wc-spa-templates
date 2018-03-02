@@ -9,6 +9,9 @@
         get: function (key) {
             return localStorage.getItem(key);
         },
+        remove: function (key) {
+            localStorage.removeItem(key);
+        },
         clear: function () {
             localStorage.clear();
         },
@@ -27,6 +30,10 @@
         get: function (key) {
             return sessionStorage.getItem(key);
         },
+        remove: function (key) {
+            sessionStorage.removeItem(key);
+        },
+
         clear: function () {
             sessionStorage.clear();
         },
