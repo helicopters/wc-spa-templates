@@ -26,12 +26,17 @@
                 }).then(res=>{
                         this.$loading.hide();
                         if (res.code == 200) {
-                            ls.set('openId', res.data.openId);
+                            ls.set('token', res.data.token);
+                            wc.config({
+                                headers: {
+                                    token: ls.get('token')
+                                }
+                            });
                             this.$router.replace({
                                 path: ls.get('userWantToPage')
                             });
                         }
-                    })
+                    });
             }
         }
     }

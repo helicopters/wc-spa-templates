@@ -62,7 +62,7 @@ let v = list[0]
 let title = list[1] || " "
 
 v = v.split('.')[0];
-let importTpl = `const ${v} = () => import(/* webpackChunkName: "${v}" */'../views/${v}');\n//>>>appendImport`
+let importTpl = `import ${v} from '../views/${v}');\n//>>>appendImport`
 let routeTpl = `{
 		path: '/${v.toLowerCase()}',
 		name: '${v}',

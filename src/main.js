@@ -12,12 +12,14 @@ import 'static/reset.css';
 import 'static/base.css';
 /* 专门用来重置样式的 */
 import 'static/cover.less'
-/* 项目配色文件 */
-import './less/color.less'
-import './less/theme.less'
 
 /* 设置页面标题 */
 import 'modules/set-title'
+
+
+
+
+/* ---------------------- 微信相关 ------------------------ */
 
 
 /* 微信上传图片 */
@@ -35,14 +37,19 @@ import wxLocation from 'modules/wx-location'
 Vue.use(wxLocation)
 
 import wxPay from 'modules/wx-pay'
-Vue.use(wxPay)
+Vue.use(wxPay);
 
-/* 弹窗 */
-import {Alert, Confirm, Toast} from 'wc-messagebox'
-import 'wc-messagebox/style.css'
-Vue.use(Alert);
-Vue.use(Confirm);
-Vue.use(Toast);
+
+/* ---------------------- 微信相关 ------------------------ */
+
+
+
+
+
+
+
+
+
 
 /* fetch */
 import 'wc-fetch'
@@ -68,31 +75,43 @@ if (process.env.NODE_ENV == 'development') {
 	})	
 }
 
+
+
+
+
+/* ----------------------- 组件相关 --------------------------*/
 import wcLoading from 'wc-loading'
 import 'wc-loading/style.css'
 Vue.use(wcLoading);
 
-/* 一些组件的引入 */
-import wcDialog from 'components/wc-dialog'
-Vue.use(wcDialog);
+// /* 弹窗 */
+// import {Alert, Confirm, Toast} from 'wc-messagebox'
+// import 'wc-messagebox/style.css'
+// Vue.use(Alert);
+// Vue.use(Confirm);
+// Vue.use(Toast);
 
-import wcForm from 'components/wc-form'
-Vue.use(wcForm);
+// /* 一些组件的引入 */
+// import wcDialog from 'components/wc-dialog'
+// Vue.use(wcDialog);
 
-import wcInput from 'components/wc-input'
-Vue.use(wcInput);
+// import wcForm from 'components/wc-form'
+// Vue.use(wcForm);
 
-/* 引入 svg icon */
-import Icon from 'components/wc-svg-icon'
-Vue.use(Icon);
+// import wcInput from 'components/wc-input'
+// Vue.use(wcInput);
 
-
-/* 引入 wc-swiper*/
-import wcSwiper from 'wc-swiper'
-import 'wc-swiper/style.css'
-Vue.use(wcSwiper);
+// /* 引入 svg icon */
+// import Icon from 'components/wc-svg-icon'
+// Vue.use(Icon);
 
 
+// /* 引入 wc-swiper*/
+// import wcSwiper from 'wc-swiper'
+// import 'wc-swiper/style.css'
+// Vue.use(wcSwiper);
+
+/* ----------------------- 组件相关 --------------------------*/
 
 
 new Vue({

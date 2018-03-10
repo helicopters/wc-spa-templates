@@ -55,8 +55,6 @@
   "devDependencies": {
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "vconsole": "^3.0.0",
-    "vux": "^2.7.7",
-    "vux-loader": "^1.1.31",
     "wc-fetch": "^1.6.9",
     "wc-loading": "^1.2.6",
     "xml-loader": "^1.2.1"

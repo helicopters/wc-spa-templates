@@ -1,4 +1,4 @@
-const Author = () => import(/* webpackChunkName: "Author" */'../views/Author');
+import Author from '../views/Author';
 //>>>appendImport
 
 export default [
