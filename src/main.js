@@ -95,8 +95,8 @@ Vue.use(wcLoading);
 // import wcDialog from 'components/wc-dialog'
 // Vue.use(wcDialog);
 
-// import wcForm from 'components/wc-form'
-// Vue.use(wcForm);
+// import vuxForm from 'components/vux-form'
+// Vue.use(vuxForm);
 
 // import wcInput from 'components/wc-input'
 // Vue.use(wcInput);
