@@ -222,8 +222,12 @@
 											isShowProgressTips: 1,
 											success (res) {
 
-												that.$store.dispatch('saveImg', {
-													image: res.serverId
+												/* ### 通过 serverId 换图片在项目服务器上面的路径 */
+												wc.get({
+													path: 'file/toOss',
+													params: {
+														image: res.serverId
+													}
 												}).then(res=>{
 													that.$emit('upload', res.data);
 

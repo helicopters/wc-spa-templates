@@ -10,8 +10,6 @@ import App from './App'
 /* 引入 reset.css, 以及 base.css */
 import 'static/reset.css';
 import 'static/base.css';
-/* 专门用来重置样式的 */
-import 'static/cover.less'
 
 /* 设置页面标题 */
 import 'modules/set-title'
