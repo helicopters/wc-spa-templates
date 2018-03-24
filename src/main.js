@@ -25,17 +25,18 @@ import wxUpload from 'modules/wx-upload'
 Vue.use(wxUpload);
 
 /* 微信分享 */
-import 'modules/wx-share'
+import wxShare from 'modules/wx-share'
+Vue.use(wxShare);
 
 /* 微信授权 */
 import 'modules/wx-auth'
 
-/* 微信定位 */
-import wxLocation from 'modules/wx-location'
-Vue.use(wxLocation)
+// /* 微信定位 */
+// import wxLocation from 'modules/wx-location'
+// Vue.use(wxLocation)
 
-import wxPay from 'modules/wx-pay'
-Vue.use(wxPay);
+// import wxPay from 'modules/wx-pay'
+// Vue.use(wxPay);
 
 
 /* ---------------------- 微信相关 ------------------------ */
