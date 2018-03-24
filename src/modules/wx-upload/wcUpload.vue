@@ -103,190 +103,187 @@
 	</div>
 </template>
 <script>
-
-	/*
+/*
 		所有依赖外界的玩意, 都被我打上了 ### 的标记, 搜索即可看见
 		1. import WX
 	*/
-	
-	// ###
-	import WX from 'config/wx'
-	export default {
-		props: {
-			/* list 是所有的预览图容器, 用户选择图片之后, 拿到的预览就会放在这里 */
-			list: {
-				default () {
-					return []
-				}
-			},
-			max: {
-				default: 9
-			},
-			type: {
-				default: 'list'
-			},
-			/* 是否显示删除按钮,  有时候可能不允许用户再修改这个玩意了, 所以删除和点击, 都要干掉*/
-			disabled: {
-				default: false
-			}
-		},
-		data () {
-			return {
-				previewList: []
-			}
-		},
-		mounted () {
-			/* 这个处理 list 同步 */
-			this.previewList = this.list;
-		},
-		/* 
+
+// ###
+import WX from 'config/wx'
+export default {
+	  props: {
+	    /* list 是所有的预览图容器, 用户选择图片之后, 拿到的预览就会放在这里 */
+	    list: {
+	      default () {
+	        return []
+	      }
+	    },
+	    max: {
+	      default: 9
+	    },
+	    type: {
+	      default: 'list'
+	    },
+	    /* 是否显示删除按钮,  有时候可能不允许用户再修改这个玩意了, 所以删除和点击, 都要干掉 */
+	    disabled: {
+	      default: false
+	    }
+	  },
+	  data () {
+	    return {
+	      previewList: []
+	    }
+	  },
+	  mounted () {
+	    /* 这个处理 list 同步 */
+	    this.previewList = this.list
+	},
+	  /*
 			watch list 的主要原因, 是因为当父组件异步更新 list 之后, 我们是同样要显示
-			出来的 
+			出来的
 		*/
-		watch: {
-			list: {
-				deep:true,
-				handler (n) {
-					this.previewList = [];
-					n.forEach(item=>{
-						this.previewList.push(item);
-					})
-				}
-			}
-		},
-		methods: {
-			/* 上传图片 */
-			upload () {
-				if (this.disabled) {
-					return;
-				}
+	  watch: {
+	    list: {
+	      deep: true,
+	      handler (n) {
+	        this.previewList = []
+	        n.forEach(item => {
+	          this.previewList.push(item)
+	        })
+	      }
+	    }
+	  },
+	  methods: {
+	    /* 上传图片 */
+	    upload () {
+	      if (this.disabled) {
+	        return
+	      }
 
-				let that = this;
-				/* 先拿到微信签名 */
-				this.fetchWXSign()
-					.then(res=>{
-						/* 然后配置 wx.config */
-						let configParams = {
-							debug: false,
-							// ###
-							appId: WX[process.env.NODE_ENV].APP_ID,
-							timestamp: res.timestamp,
-							nonceStr: res.noncestr,
-							signature: res.signature,
-							jsApiList: ['checkJsApi','chooseImage', 'uploadImage'] 
-						}
+	      const that = this
+	      /* 先拿到微信签名 */
+	      this.fetchWXSign()
+	        .then(res => {
+	          /* 然后配置 wx.config */
+	          const configParams = {
+	            debug: false,
+	            // ###
+	            appId: WX[process.env.NODE_ENV].APP_ID,
+	            timestamp: res.timestamp,
+	            nonceStr: res.noncestr,
+	            signature: res.signature,
+	            jsApiList: ['checkJsApi', 'chooseImage', 'uploadImage']
+	          }
 
-						wx.config(configParams);
+	          wx.config(configParams)
 
-						/* 然后在 ready 之后开始调用 */
-						/* 从这里开始所有的 this, 都使用 that 替代*/
-						wx.ready(()=>{
-							let count = that.count(this.previewList.length, that.max);
-							/* 如果当次上传数量为0, 就不允许再上传了
-							   这个可能是因为上次上传d
-							 */
-							if (count == 0) {
-								return;
-							}
-							wx.chooseImage({
-								// 默认9
-								count: count, 
-								// 可以指定是原图还是压缩图，默认二者都有
-								sizeType: ['original', 'compressed'], 
-								// 可以指定来源是相册还是相机，默认二者都有
-								sourceType: ['album', 'camera'], 
-								success (res) {
-									/*
+	          /* 然后在 ready 之后开始调用 */
+	          /* 从这里开始所有的 this, 都使用 that 替代 */
+	          wx.ready(() => {
+	            const count = that.count(this.previewList.length, that.max)
+	            /* 如果当次上传数量为0, 就不允许再上传了
+						   这个可能是因为上次上传d
+						 */
+	            if (count == 0) {
+	              return
+	            }
+	            wx.chooseImage({
+	              // 默认9
+	              count: count,
+	              // 可以指定是原图还是压缩图，默认二者都有
+	              sizeType: ['original', 'compressed'],
+	              // 可以指定来源是相册还是相机，默认二者都有
+	              sourceType: ['album', 'camera'],
+	              success (res) {
+	                /*
 										拿到列表之后保存到当前列表
 									*/
-									that.previewList = that.previewList.concat(res.localIds); 
-									/*
-										将 localId 变成 serverId
-										并且一次只能将一个 localId 变成 serverId
-									*/
-									let count = 0;
-									let curIds = res.localIds;
+	                that.previewList = that.previewList.concat(res.localIds)
+	                /*
+									将 localId 变成 serverId
+									并且一次只能将一个 localId 变成 serverId
+								*/
+	                let count = 0
+	                const curIds = res.localIds
 
-									let transformToServerId = localId => {
-										/* 如果当前 count 的数量大于等于整个当次选中的
+	                const transformToServerId = localId => {
+	                  /* 如果当前 count 的数量大于等于整个当次选中的
 										图片的个数, 那么就停止这种转换, 因为说明已经转换
-										的差不多了*/
-										if (count >= res.localIds.length) {
-											// this.uploadDone = true;
-											this.$emit('uploadEnd', true);
-											return;
-										}
+										的差不多了 */
+	                  if (count >= res.localIds.length) {
+	                    // this.uploadDone = true;
+	                    this.$emit('uploadEnd', true)
+	                    return
+	                  }
 
-										wx.uploadImage({
-											localId: localId,
-											isShowProgressTips: 1,
-											success (res) {
+	                  wx.uploadImage({
+	                    localId: localId,
+	                    isShowProgressTips: 1,
+	                    success (res) {
+	                      /* ### 通过 serverId 换图片在项目服务器上面的路径 */
+	                      wc.get({
+	                        path: 'file/toOss',
+	                        params: {
+	                          image: res.serverId
+	                        }
+	                      }).then(res => {
+	                        that.$emit('upload', res.data)
 
-												/* ### 通过 serverId 换图片在项目服务器上面的路径 */
-												wc.get({
-													path: 'file/toOss',
-													params: {
-														image: res.serverId
-													}
-												}).then(res=>{
-													that.$emit('upload', res.data);
+	                        count++
+	                        /* 继续下一个 */
+	                        transformToServerId(curIds[count])
+	                      })
+	                    }
+	                  })
+	                }
 
-													count++;
-													/* 继续下一个*/
-													transformToServerId(curIds[count]);
+	                transformToServerId(curIds[count])
+	              }
+	            })
+	          })
+	        })
+	    },
 
-												});
-											}
-										});
-									}
-
-									transformToServerId(curIds[count]);
-								}
-							});
-						})
-					});
-			},
-
-			/* ###拿微信签名 */
-			fetchWXSign () {
-				/* 拿到微信授权 */
-				let signParams = {
-					data: {
-						reqUrl: encodeURIComponent(location.href.split('#')[0])
-					}
-				}
-				return wc.get({
-					path: 'weixin/signature',
-					params: signParams
-				}).then(res=>{
-					if (res.code == 200) {
-						return new Promise((resolve)=>{
-							resolve(res.data[0])
-						});
-					}
-				})
-			},
-			/* 计算当前可以上传多少张图片 */
-			count (already, max) {
-				/* 如果已经上传了最大张数 */
-				if (already == max) {
-					return 0;
-				}
-				/* 如果没有到最大上传个数*/
-				if (already < max) {
-					/* 如果还有超过 9 张可以上传, 那么本次上传只允许 9 张*/
-					if (max - already >= 9) {
-						return 9;
-					} else {
-						return max -already;
-					}
-				}
-			},
-			/* 删除 */
-			del (index) {
-				this.previewList.splice(index, 1);
-				this.$emit('del', index);
-			}
-		}
-	}
+	    /* ###拿微信签名 */
+	    fetchWXSign () {
+	      /* 拿到微信授权 */
+	      const signParams = {
+	        data: {
+	          reqUrl: encodeURIComponent(location.href.split('#')[0])
+	        }
+	      }
+	      return wc.get({
+	        path: 'weixin/signature',
+	        params: signParams
+	      }).then(res => {
+	        if (res.code == 200) {
+	          return new Promise((resolve) => {
+	            resolve(res.data[0])
+	          })
+	        }
+	      })
+	    },
+	    /* 计算当前可以上传多少张图片 */
+	    count (already, max) {
+	      /* 如果已经上传了最大张数 */
+	      if (already == max) {
+	        return 0
+	      }
+	      /* 如果没有到最大上传个数 */
+	      if (already < max) {
+	        /* 如果还有超过 9 张可以上传, 那么本次上传只允许 9 张 */
+	        if (max - already >= 9) {
+	          return 9
+	        } else {
+	          return max - already
+	        }
+	      }
+	    },
+	    /* 删除 */
+	    del (index) {
+	      this.previewList.splice(index, 1)
+	      this.$emit('del', index)
+	    }
+	  }
+}
 </script>

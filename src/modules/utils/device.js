@@ -5,23 +5,22 @@
     isiPad()
     isWeChat()
 
-
 */
-let appVersion = navigator.appVersion;
-let userAgent  = navigator.userAgent;
+const appVersion = navigator.appVersion
+const userAgent = navigator.userAgent
 
 export default {
 	isiOS () {
-		return !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+		return !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 	},
 	isAndroid () {
-		return userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1;
+		return userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1
 	},
 	isiPad () {
-		return userAgent.indexOf('iPad') > -1;
+		return userAgent.indexOf('iPad') > -1
 	},
 	isWeChat () {
-		return userAgent.indexOf('MicroMessenger') > -1;
+		return userAgent.indexOf('MicroMessenger') > -1
 	}
 }
 // function isAndroid () {
@@ -30,12 +29,11 @@ export default {
 // }
 // function isiOS () {
 // 	return userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-	// return appVersion.match(/iphone/gi);
+// return appVersion.match(/iphone/gi);
 // }
 // function isiPad () {
 // 	return userAgent.indexOf('iPad') > -1
 // }
-
 
 // function isBrowser () {}
 // function isWeixin () {

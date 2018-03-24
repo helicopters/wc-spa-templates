@@ -15,7 +15,6 @@
     args:
         支持任意个参数
 
-
 	minus
     ---------------------
     input:
@@ -24,7 +23,6 @@
 		v
     args:
         支持任意个参数
-
 
 	times
     ---------------------
@@ -35,7 +33,6 @@
     args:
         支持任意个参数
 
-
 	divide
     ---------------------
     input:
@@ -45,26 +42,25 @@
     args:
         支持任意个参数
 
-
 */
-import Decimal from 'decimal.js-light';
+import Decimal from 'decimal.js-light'
 
-let toArray = value => {
-	return Array.prototype.slice.call(value);
+const toArray = value => {
+	return Array.prototype.slice.call(value)
 }
 
-let god = type => {
+const god = type => {
 	return function () {
-		let list = toArray(arguments);
+		const list = toArray(arguments)
 
-		let base = new Decimal(list[0]);
+		let base = new Decimal(list[0])
 
-		let key = 1;
+		let key = 1
 
-		for(;key<list.length;key++) {
-			base = base[type](list[key]);
+		for (;key < list.length; key++) {
+			base = base[type](list[key])
 		}
-		return base.toNumber();		
+		return base.toNumber()
 	}
 }
 

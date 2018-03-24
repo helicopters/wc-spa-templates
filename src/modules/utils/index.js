@@ -15,5 +15,5 @@ window.utils = {
 	safeParse
 }
 
-window.decimal = decimal;
-window.device = device;
+window.decimal = decimal
+window.device = device

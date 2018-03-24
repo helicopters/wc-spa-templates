@@ -1,6 +1,6 @@
-import Author from '../views/Author';
-import bind from '../views/bind';
-//>>>appendImport
+import Author from '../views/Author'
+import bind from '../views/bind'
+// >>>appendImport
 
 export default [
 	{
@@ -9,7 +9,7 @@ export default [
 		component: Author,
 		meta: {
 			auth: false,
-			title: "微信授权"
+			title: '微信授权'
 		}
 	},
 	{
@@ -18,8 +18,8 @@ export default [
 		component: bind,
 		meta: {
 			auth: false,
-			title: " "
+			title: ' '
 		}
-	},
-	//>>>appendRoute
+	}
+	// >>>appendRoute
 ]

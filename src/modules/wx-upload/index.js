@@ -3,7 +3,6 @@ import wcUpload from './wcUpload'
 
 export default {
 	install (Vue) {
-		Vue.component('wcUpload', Vue.extend(wcUpload));
+		Vue.component('wcUpload', Vue.extend(wcUpload))
 	}
 }
-

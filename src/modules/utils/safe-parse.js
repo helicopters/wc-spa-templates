@@ -1,9 +1,9 @@
 function safeParse (jsonStr) {
-	let obj = {};
+	let obj = {}
 	try {
-		obj = JSON.parse(jsonStr);
-	}catch (e) {
-		obj = {};
+		obj = JSON.parse(jsonStr)
+	} catch (e) {
+		obj = {}
 	}
-	return obj;
+	return obj
 }

@@ -14,26 +14,24 @@
 
 */
 
-
 // 将对象转换为 queryString 的形式
 import _isEmpty from 'lodash/isEmpty'
 
-export default (obj, appendQ=true) => {
+export default (obj, appendQ = true) => {
+	// 如果是空对象, 返回一个空字符串
+	if (_isEmpty(obj)) {
+		return ''
+	}
 
-    // 如果是空对象, 返回一个空字符串
-    if (_isEmpty(obj)) {
-        return '';
-    }
-
-    let str = '';
-    for (let key in obj) {
-        if (typeof obj[key] === 'object') {
-            obj[key] = JSON.stringify(obj[key]);
-        }
-    }
-    for (let key in obj) {
-        str = str + '&' + key + '=' + obj[key];
-    }
-    // 是否在生成的字符串第一位添加 ?
-    return appendQ ? ('?' + str.slice(1)) : str.slice(1);
+	let str = ''
+	for (const key in obj) {
+		if (typeof obj[key] === 'object') {
+			obj[key] = JSON.stringify(obj[key])
+		}
+	}
+	for (const key in obj) {
+		str = str + '&' + key + '=' + obj[key]
+	}
+	// 是否在生成的字符串第一位添加 ?
+	return appendQ ? ('?' + str.slice(1)) : str.slice(1)
 }

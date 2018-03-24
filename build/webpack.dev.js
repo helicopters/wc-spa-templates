@@ -46,20 +46,66 @@ const config = {
                 use: ['style-loader', 'css-loader']
             },
 
+
+/*
+
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loaders: [
+                        'babel-loader',
+                        'eslint-loader'
+                    ],
+                    query: {
+                        cacheDirectory: true
+                    }
+                },
+*/
+
+
+
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                query: {
-                    compact: false
-                },
+                use: [{
+                    loader: 'babel-loader'
+                }, {
+                    loader: 'eslint-loader',
+                    options: {
+                        fix: true
+                    }
+                }],
+                // loaders: [
+                //     'babel-loader',
+                //     'eslint-loader'
+                // ],
+                // // query: {
+                // //     compact: false
+                // // },
+                // options: {
+                //     fix: true
+                // },
                 include: [path.resolve(process.cwd(), 'src')],
             },
 
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
+                {
+                    test: /\.vue$/,
+                    enforce: 'pre',  // 在babel-loader对源码进行编译前进行lint的检查
+                    // include: /src/,  // src文件夹下的文件需要被lint
+                    include: [path.resolve(process.cwd(), 'src')],
+                    use: [{
+                        loader: 'eslint-loader',
+                        options: {
+                            formatter: require('eslint-friendly-formatter'),   // 编译后错误报告格式
+                            fix: true
 
-            }, {
+                        }
+                    }]
+                    // exclude: /node_modules/ 可以不用定义这个字段的属性值，eslint会自动忽略node_modules和bower_
+                },
+
+
+
+            {
 
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',

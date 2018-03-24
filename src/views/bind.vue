@@ -213,21 +213,20 @@
 	</div>
 </template>
 <script>
-	export default {
-		components: {
-			
-		},
-		data () {
-			return {
+export default {
+	  components: {
 
-			}
-		},
-		mounted () {
+	  },
+	  data () {
+	    return {
 
-		}, /* end mounted */
-		methods: {
+	    }
+	  },
+	  mounted () {
 
-		} /* end methods */
-	} /* end export*/
-	
+	  }, /* end mounted */
+	  methods: {
+
+	  } /* end methods */
+} /* end export */
 </script>

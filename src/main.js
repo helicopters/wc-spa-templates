@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* 引入工具函数, 放到顶层引入, 防止在之前的模块中没有定义 */
 import 'modules/utils'
 
@@ -14,40 +15,27 @@ import 'static/base.css';
 /* 设置页面标题 */
 import 'modules/set-title'
 
-
-
-
 /* ---------------------- 微信相关 ------------------------ */
-
 
 /* 微信上传图片 */
 import wxUpload from 'modules/wx-upload'
 Vue.use(wxUpload);
 
 /* 微信分享 */
-import 'modules/wx-share'
+import wxShare from 'modules/wx-share'
+Vue.use(wxShare);
 
 /* 微信授权 */
 import 'modules/wx-auth'
 
-/* 微信定位 */
-import wxLocation from 'modules/wx-location'
-Vue.use(wxLocation)
+// /* 微信定位 */
+// import wxLocation from 'modules/wx-location'
+// Vue.use(wxLocation)
 
-import wxPay from 'modules/wx-pay'
-Vue.use(wxPay);
-
+// import wxPay from 'modules/wx-pay'
+// Vue.use(wxPay);
 
 /* ---------------------- 微信相关 ------------------------ */
-
-
-
-
-
-
-
-
-
 
 /* fetch */
 import 'wc-fetch'
@@ -72,10 +60,6 @@ if (process.env.NODE_ENV == 'development') {
 		}
 	})	
 }
-
-
-
-
 
 /* ----------------------- 组件相关 --------------------------*/
 import wcLoading from 'wc-loading'
@@ -103,14 +87,12 @@ Vue.use(wcLoading);
 // import Icon from 'components/wc-svg-icon'
 // Vue.use(Icon);
 
-
 // /* 引入 wc-swiper*/
 // import wcSwiper from 'wc-swiper'
 // import 'wc-swiper/style.css'
 // Vue.use(wcSwiper);
 
 /* ----------------------- 组件相关 --------------------------*/
-
 
 new Vue({
     el: '#app',
@@ -119,3 +101,4 @@ new Vue({
     template: '<App/>',
     components: {App}
 })
+/* eslint-enable */
