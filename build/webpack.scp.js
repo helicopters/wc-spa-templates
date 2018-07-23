@@ -3,8 +3,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// const env = require('../config/build')
-
+// const env = require('../config/scp')
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 const config = {
     node: {
         Buffer: false
@@ -15,35 +17,43 @@ const config = {
     output: {
         path: path.resolve(process.cwd(), 'dist'),
         filename: 'static/[name].[hash:8].js',
-        chunkFilename: '[name].chunk.js',
-        publicPath:'./'
+        publicPath: './'
     },
     resolve: {
         extensions: ['.js', '.json', '.vue'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            'modules': path.resolve(process.cwd(), 'src/modules'),
-            'components': path.resolve(process.cwd(), 'src/components'),
-            'config': path.resolve(process.cwd(), 'src/config'),
-            'router': path.resolve(process.cwd(), 'src/router'),
-            'assets': path.resolve(process.cwd(), 'src/assets'),  
-            'static': path.resolve(process.cwd(), 'static')            
+            '@': resolve('src')
         }
     },
     module: {
         rules: [{
+            test: /\.scss$/,
+            use: [
+                "style-loader", // creates style nodes from JS strings
+                "css-loader", // translates CSS into CommonJS
+                "sass-loader" // compiles Sass to CSS
+            ]
+        },{
                 // 仅仅处理 css 文件, css-loader 是处理, postcss-loader 是加前缀
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
+                    // fallback: "style-loader",
                     use: 'css-loader?minimize!postcss-loader'
                 })
+            }, {
+                test: /\.svg$/,
+                loader: 'svg-sprite-loader',
+                include: [path.resolve(process.cwd(), 'src/icons')],
+                options: {
+                    symbolId: 'icon-[name]'
+                }
             }, {
                 // 我之前以为, 这个玩意会去把 .vue 文件里面所有的 less 都干掉, 但是现在明显不是
                 // 它只会处理单独的 less 文件
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
+                    // fallback: "style-loader",
                     use: 'css-loader?minimize!postcss-loader!less-loader'
                 })
             }, {
@@ -60,17 +70,18 @@ const config = {
                     loaders: {
                         css: ExtractTextPlugin.extract({
                             use: 'css-loader?minimize',
-                            fallback: 'vue-style-loader'
+                            // fallback: 'vue-style-loader'
                         }),
                         less: ExtractTextPlugin.extract({
                             use: 'css-loader?minimize!postcss-loader!less-loader',
-                            fallback: 'vue-style-loader'
+                            // fallback: 'vue-style-loader'
                         })
                     }
                 }
             }, {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
+                exclude: [path.resolve(process.cwd(),'src/icons')],                
                 query: {
                     limit: 1000 * 5,
                     name: 'static/[name].[hash:7].[ext]'
@@ -86,9 +97,6 @@ const config = {
         ]
     },
     plugins: [
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 // 干掉打包的时候出现的 warnings
@@ -114,14 +122,6 @@ const config = {
                 )
             }
         }),
-
-        new webpack.optimize.CommonsChunkPlugin({
-          async: 'used-twice',
-          minChunks: (module, count) => (
-            count >= 2
-          ),
-        }),
-
         // extract webpack runtime and module manifest to its own file in order to
         // prevent vendor hash from being updated whenever app bundle is updated
         new webpack.optimize.CommonsChunkPlugin({
@@ -130,9 +130,11 @@ const config = {
         }),
         // 定义全局变量
         new webpack.DefinePlugin({
-            'process.env': { NODE_ENV: '"scp"' }
+            'process.env': {
+                NODE_ENV: '"scp"'
+            }
         })
     ]
 };
 
-module.exports = config
+module.exports = config;

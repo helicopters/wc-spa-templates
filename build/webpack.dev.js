@@ -5,11 +5,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // 在命令行里面的错误提示友好一点
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
-
-
-
 // 获取全局变量
 // const env = require('../config/dev')
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 const config = {
     entry: {
@@ -27,16 +28,18 @@ const config = {
         extensions: ['.js', '.json', '.vue'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            'modules': path.resolve(process.cwd(), 'src/modules'),
-            'components': path.resolve(process.cwd(), 'src/components'),
-            'config': path.resolve(process.cwd(), 'src/config'),
-            'router': path.resolve(process.cwd(), 'src/router'),
-            'assets': path.resolve(process.cwd(), 'src/assets'),
-            'static': path.resolve(process.cwd(), 'static')
+            '@': resolve('src')
         }
     },
     module: {
         rules: [{
+            test: /\.scss$/,
+            use: [
+                "style-loader", // creates style nodes from JS strings
+                "css-loader", // translates CSS into CommonJS
+                "sass-loader" // compiles Sass to CSS
+            ]
+        },{
                 test: /\.less$/,
                 use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
             }, {
@@ -44,70 +47,30 @@ const config = {
                 // 这个后面不能加上 postcss-loader
                 // 加上之后报错: 所有的 css 文件都找不到
                 use: ['style-loader', 'css-loader']
-            },
-
-
-/*
-
-                {
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    loaders: [
-                        'babel-loader',
-                        'eslint-loader'
-                    ],
-                    query: {
-                        cacheDirectory: true
-                    }
-                },
-*/
-
-
-
-            {
+            }, {
+                test: /\.svg$/,
+                loader: 'svg-sprite-loader',
+                include: [path.resolve(process.cwd(), 'src/icons')],
+                options: {
+                    symbolId: 'icon-[name]'
+                }
+            }, {
                 test: /\.js$/,
-                use: [{
-                    loader: 'babel-loader'
-                }, {
-                    loader: 'eslint-loader',
-                    options: {
-                        fix: true
-                    }
-                }],
-                // loaders: [
-                //     'babel-loader',
-                //     'eslint-loader'
-                // ],
-                // // query: {
-                // //     compact: false
-                // // },
-                // options: {
-                //     fix: true
-                // },
+                loader: 'babel-loader',
+                query: {
+                    compact: false
+                },
                 include: [path.resolve(process.cwd(), 'src')],
             },
 
-                {
-                    test: /\.vue$/,
-                    enforce: 'pre',  // 在babel-loader对源码进行编译前进行lint的检查
-                    // include: /src/,  // src文件夹下的文件需要被lint
-                    include: [path.resolve(process.cwd(), 'src')],
-                    use: [{
-                        loader: 'eslint-loader',
-                        options: {
-                            formatter: require('eslint-friendly-formatter'),   // 编译后错误报告格式
-                            fix: true
-
-                        }
-                    }]
-                    // exclude: /node_modules/ 可以不用定义这个字段的属性值，eslint会自动忽略node_modules和bower_
-                },
-
-
-
             {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+
+            }, {
 
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                exclude: [path.resolve(process.cwd(),'src/icons')],                
                 loader: 'url-loader',
                 query: {
                     limit: 1000 * 10,
@@ -144,4 +107,4 @@ const config = {
     ]
 };
 
-module.exports = config
+module.exports = config;
