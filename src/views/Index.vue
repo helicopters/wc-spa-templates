@@ -1,5 +1,9 @@
 <style lang="less">
-  
+  .container {
+    background: red;
+    display: flex;
+    justify-content: center;
+  }
 </style>
 <template>
   <div class="container">
