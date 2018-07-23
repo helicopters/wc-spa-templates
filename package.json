@@ -70,6 +70,7 @@
     "vconsole": "^3.0.0",
     "wc-fetch": "^1.6.9",
     "wc-loading": "^1.2.6",
+    "webpack": "^2.7.0",
     "xml-loader": "^1.2.1"
   }
 }
