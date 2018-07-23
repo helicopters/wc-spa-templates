@@ -13,12 +13,11 @@ const chalk = require('chalk');
 
 const app = express();
 
-// 这个玩意可以直接给个随机数
 
-// 80 端口是 http 协议的专用端口, 专用端口！
-// const port = parseInt(Math.random() * 10000) + 5000;
-const port = 9999;
-// const  port = '80';
+// const port = 9999;
+// 这个玩意可以直接给个随机数
+const port = parseInt(Math.random() * 10000) + 5000;
+
 // 设置 webpackDevMiddleware
 const devMiddleware = webpackDevMiddleware(compiler, {
 	publicPath: '/',

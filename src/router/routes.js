@@ -6,6 +6,6 @@ export default [{
   component: Index,
   meta: {
     auth: false,
-    title: 'Index'
+    title: '首页'
   }
 }]

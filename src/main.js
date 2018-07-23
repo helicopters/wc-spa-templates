@@ -7,6 +7,8 @@ import App from './App'
 import '../static/reset.css'
 import '../static/base.css'
 
+import '@/modules/set-title'
+
 new Vue({
   el: '#app',
   router,
