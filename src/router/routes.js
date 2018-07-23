@@ -1,20 +1,11 @@
-import Author from '../views/Author'
-import Bind from '../views/Bind'
+import Index from '@/views/Index'
 
 export default [{
-  path: '/author',
-  name: 'Author',
-  component: Author,
+  path: '/',
+  name: 'Index',
+  component: Index,
   meta: {
     auth: false,
-    title: '微信授权'
-  }
-}, {
-  path: '/bind',
-  name: 'bind',
-  component: Bind,
-  meta: {
-    auth: false,
-    title: ' '
+    title: 'Index'
   }
 }]
