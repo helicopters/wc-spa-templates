@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 // const env = require('../config/build')
 function resolve (dir) {
@@ -26,6 +27,7 @@ const config = {
             '@': resolve('src')
         }
     },
+    mode: 'production',
     module: {
         rules: [{
             test: /\.scss$/,
@@ -134,12 +136,13 @@ const config = {
             name: 'manifest',
             chunks: ['vendor']
         }),
+        new VueLoaderPlugin()
         // 定义全局变量
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        })
+        // new webpack.DefinePlugin({
+        //     'process.env': {
+        //         NODE_ENV: '"production"'
+        //     }
+        // })
     ]
 };
 

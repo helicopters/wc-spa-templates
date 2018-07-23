@@ -8,6 +8,9 @@
 </template>
 <script>
   export default {
-    name: 'Index'
+    name: 'Index',
+    mounted () {
+      console.log(process.env.NODE_ENV)
+    }
   }
 </script>
