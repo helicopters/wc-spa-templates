@@ -1,7 +1,8 @@
 export default {
 	'development': {
-		url: 'http://explorelife.vip/process'
+		url: ''
 	},
 	'production': {
+    url: ''
 	}
 }
