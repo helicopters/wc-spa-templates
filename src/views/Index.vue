@@ -17,10 +17,13 @@
   </div>
 </template>
 <script>
+  import qs from 'query-string'
   export default {
     name: 'Index',
     mounted () {
-      console.log(process.env.NODE_ENV)
+      console.log(process.env.NODE_ENV);
+
+
     }
   }
 </script>

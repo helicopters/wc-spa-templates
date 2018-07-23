@@ -16,6 +16,21 @@ import '@/modules/set-title'
 import Icon from '@/components/Icon'
 Vue.use(Icon)
 
+/* axios 引入 */
+import Service from '@/config/service'
+
+axios.defaults.baseURL = Service[process.env.NODE_ENV].url;
+axios.defaults.headers['Content-Type'] = 'application/json';
+
+/* 
+做全局拦截使用
+https://blog.csdn.net/sjn0503/article/details/74729300 
+*/
+axios.interceptors.response.use((response) => {
+  
+})
+
+
 new Vue({
   el: '#app',
   router,
