@@ -12,9 +12,7 @@ import '../static/base.css'
 /* 纯粹引入, 没有任何配置和主动调用 */
 import '@/modules/set-title'
 
-/* 组件引入 */
-import Icon from '@/components/Icon'
-Vue.use(Icon)
+
 
 /* axios 引入 */
 import Service from '@/config/service'
@@ -29,6 +27,16 @@ https://blog.csdn.net/sjn0503/article/details/74729300
 axios.interceptors.response.use((response) => {
   
 })
+
+
+/* Icon */
+import Icon from '@/components/Icon'
+Vue.use(Icon)
+
+/* UI 组件 增强 */
+import { Switch, Picker } from 'vant';
+Vue.use(Switch);
+Vue.use(Picker);
 
 
 new Vue({
