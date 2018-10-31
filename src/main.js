@@ -5,7 +5,7 @@ import router from '@/router'
 import App from './App'
 
 import '../static/reset.css'
-import '../static/base.css'
+import '../static/common.css'
 
 /* 纯粹引入, 没有任何配置和主动调用 */
 import '@/modules/set-title'
@@ -23,17 +23,6 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 axios.interceptors.response.use((response) => {
   
 })
-
-
-/* Icon */
-import Icon from '@/components/Icon'
-Vue.use(Icon)
-
-/* Vant*/
-import { Switch, Picker } from 'vant';
-Vue.use(Switch);
-Vue.use(Picker);
-
 
 new Vue({
   el: '#app',
